@@ -1,0 +1,337 @@
+
+\documentclass[12pt, draftclsnofoot, onecolumn]{IEEEtran}
+% \documentclass[conference]{IEEEtran}
+% \documentclass[journal,comsoc]{IEEEtran}
+
+\makeatletter
+\def\ps@headings{%
+\def\@oddhead{\mbox{}\scriptsize\rightmark \hfil \thepage}%
+\def\@evenhead{\scriptsize\thepage \hfil \leftmark\mbox{}}%
+\def\@oddfoot{}%
+\def\@evenfoot{}}
+\makeatother \pagestyle{headings}
+
+\IEEEoverridecommandlockouts
+% \usepackage[mathcal]{euscript}
+\usepackage{bbm}
+\usepackage{amsfonts}
+\usepackage[dvips]{graphicx}
+\usepackage{times}
+\usepackage{cite}
+\usepackage{amsmath}
+\usepackage{array}
+%\usepackage{chgbar}
+\usepackage{amssymb}
+\newcommand{\mb}{\mathbf}
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\sss}{\scriptscriptstyle}
+\newcounter{mytempeqncnt}
+\usepackage{stfloats}
+% \usepackage{slashbox}
+\usepackage{graphicx}
+\usepackage{footnote}
+% \usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{subeqnarray}
+\usepackage{cases}
+\usepackage{threeparttable}
+\usepackage{color}
+% \usepackage{hyperref}
+\usepackage{epstopdf}
+\usepackage{cleveref}
+%\usepackage{algpseudocode}
+\usepackage{bm}
+% \usepackage{subcaption}
+\usepackage{dsfont}
+
+% to add parentheses around subfig references
+% \usepackage[labelformat=simple]{subcaption}
+% \renewcommand\thesubfigure{(\alph{subfigure})}
+
+%\usepackage[numbers,sort&compress]{natbib}
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}{Remark}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{claim}{Claim}
+\newtheorem{proof}{Proof}
+\newtheorem{assumption}{Assumption}
+
+\begin{document}
+
+\title{The Application of LDM to Non-Orthogonal Multicast and Unicast Transmission in (Large-Scale) Cellular Networks}
+
+% \author{Erkai~Chen and Meixia~Tao\\
+% \thanks{E.~Chen and M.~Tao are with the Department of Electronic Engineering at Shanghai Jiao Tong University, Shanghai, P. R. China (emails: \{cek1006, mxtao\}@sjtu.edu.cn).
+% }
+% }
+
+\maketitle
+
+% \begin{abstract}
+
+% \end{abstract}
+
+
+% \begin{IEEEkeywords}
+
+% \end{IEEEkeywords}
+% {\color{red} Without caching}
+
+
+% {\color{blue} An SVC encoded video consists of one base layer and several enhancement layers in a hierarchical dependency structure, where the base layer and the lower enhancement layers are required in order to decode the higher enhancement layers. The decoded video quality is progressively improved when more enhancement layers are successfully decoded.--From Hwang' JSTSP15}
+
+% \section{Motivation}
+% Consider the multicast video streaming in wireless networks. When a non-scalable video coding is used, the streaming rate depends on the user with the worst channel in the multicast group, which fundamentally limits the utility of the users with good channel conditions. Scalable video coding, on the other hand, is very suitable for multicast in wireless network, particularly, it facilitates the delivery of a video stream to a group of users with heterogeneous channel conditions. With proper scheduling schemes, scalable coding can ensure that the users with good channels receive additional layers and achieve better playback quality.
+
+% Therefore, it is of particular importance to investigate multicast scheduling algorithms for scalable video streaming.
+
+\section{System Model}
+Consider the downlink of a multi-cell cellular network, where $N$ BSs, each equipped with $L$ transmit antennas, provide both multicast and unicast services to $K$ single-antenna users. Specifically, it is assumed that all the $K$ users are divided into $M$ multicast groups according to their multicast requests. Let $\mathcal{K}_m$ denote the set of users that belong to group $m$. Each user participates in only one multicast group, thus $\mathcal{K}_i \cap \mathcal{K}_j = \emptyset, i \neq j$ for all $ i, j \in \mathcal{M}$ and $\cup_{m = 1}^M \mathcal{K}_m = \mathcal{K}$. In addition, each user has a dedicated unicast request
+
+
+% At user side, the users in the same multicast group can decode the video with different levels of quality, depending on their channel conditions. Then, each multicast group $m$ can be further divided into $L$ subgroups, one for each level of quality. 
+% To obtain the video of higher quality, the users should decode more ELs. However, decoding a higher EL is based on the data information of the BL and all lower ELs. For example, to obtain a video of quality $l \in \{1,\dots, L\}$, all the layers in $\{1,\dots, l \}$ have to be successfully decoded.
+
+
+
+\section{Signal Model}
+Based on the principle of LDM, the multicast and unicast signals are superposed with different powers at each BS and hence the transmit signal of BS $n$ which can be written as
+\begin{align}
+x_{n} = \sqrt{p_{n}^{\text{M}}} x_{n}^{\text{M}} + \sqrt{p_{n}^{\text{U}}} x_{n}^{\text{U}},~\forall n \in \mathcal{N},
+\end{align}
+where $x_{n}^{\text{M}}$ and $x_{n}^{\text{U}}$ are the multicast and unicast signals, respectively, with $\mathbb{E} \left[ \lvert x_{n}^{\text{M}} \rvert^2 \right] = \mathbb{E} \left[ \lvert x_{n}^{\text{U}} \rvert^2 \right] = 1$. $p_{n}^{\text{M}}$ and $p_{n}^{\text{U}}$ are the corresponding transmit power of multicast and unicast signals, respectively. Let $\mathbf{w}_{m,n} \in \mathbb{C}^{L}$ denote the multicast beamforming vector of group $m$ at BS $n$, for all $ m \in \mathcal{M}$ and $\mathbf{v}_{k,n} \in \mathbb{C}^{L}$ denote the unicast beamforming vector from the $n$-th BS to the $k$-th user, for all $k \in \mathcal{K}$. Then the transmit signal of BS $n$ can be rewritten as 
+\begin{align}
+x_{n} = \sum_{m=1}^M \mathbf{w}_{m,n} s_{m}^{\text{M}} + \sum_{k=1}^K \mathbf{v}_{k,n} s_{k}^{\text{U}},~\forall n \in \mathcal{N},
+\end{align}
+where $s_{m}^{\text{M}} \in \mathbb{C}$ and $s_{k}^{\text{U}} \in \mathbb{C}$ are the multicast data symbol that transmitted to multicast group $m$ and the unicast data symbol to user $k$ with $\mathbb{E} \left[ \lvert s_{m}^{\text{M}} \rvert^2 \right] = \mathbb{E} \left[ \lvert s_{k}^{\text{U}} \rvert^2 \right] = 1$. Therefore, we have
+\begin{align}
+p_{n}^{\text{M}} = \sum_{m=1}^M \lVert \mathbf{w}_{m,n} \rVert_2^2, \quad
+p_{n}^{\text{U}} = \sum_{k=1}^K \lVert \mathbf{v}_{k,n} \rVert_2^2,~\forall n \in \mathcal{N},
+\end{align}
+
+Then, the corresponding received signal at each user can be written as
+\begin{align}
+y_{k} 
+&= \sum_{n = 1}^N \mathbf{h}_{k,n}^H x_{n} + n_k, \nonumber \\
+&= \sum_{n = 1}^N \sum_{m=1}^M \mathbf{h}_{k,n}^H \mathbf{w}_{m,n} s_{m}^{\text{M}} + \sum_{n = 1}^N \sum_{k=1}^K \mathbf{h}_{k,n}^H \mathbf{v}_{k,n} s_{k}^{\text{U}} + n_k, \nonumber \\
+&= \sum_{m=1}^M \mathbf{h}_{k}^H \mathbf{w}_{m} s_{m}^{\text{M}} + \sum_{k=1}^K \mathbf{h}_{k}^H \mathbf{v}_{k} s_{k}^{\text{U}} + n_k,~\forall k \in \mathcal{K}_m, m \in \mathcal{M},
+\end{align}
+where $\mathbf{w}_{m} = [\mathbf{w}_{m,1}^H,\mathbf{w}_{m,2}^H, \dots, \mathbf{w}_{m,N}^H ]^H \in \mathbb{C}^{NL\times 1}$ and $\mathbf{v}_{k} = [\mathbf{v}_{k,1}^H,\mathbf{v}_{k,2}^H, \dots, \mathbf{v}_{k,N}^H ]^H \in \mathbb{C}^{NL\times 1}$ are the aggregate network-wide multicast beamforming vector for group $m$ and unicast beamforming vector for user $k$ from all BSs, respectively, $\mathbf{h}_k = [\mathbf{h}_{k,1}^H,\mathbf{h}_{k,2}^H, \dots, \mathbf{h}_{k,N}^H ]^H \in \mathbb{C}^{NL\times 1}$ is the network-wide channel vector from all the BSs to user $k$, and $n_k \sim \mathcal{CN}(0,\sigma_k^2)$ is the additive white Gaussian noise at user $k$.
+
+
+At the user side, successive interference cancellation (SIC) is adopted to decode multiple data streams. In general, the multicast data, which is intended for multiple users, should have a higher priority and a larger transmit power, as in [xx]. Therefore, each user first decode its multicast data by treating the unicast signal as background noise and then its unicast data by removing the interference of its multicast signal.
+Thus, the SINRs of the multicast data and unicast data at the $k$-th user in group $m$ are expressed as
+\begin{align}
+\text{SINR}_{k}^{\text{M}} = \frac {\lvert \mathbf{h}_k^H \mathbf{w}_{m} \rvert^2} {\sum_{i \neq m} \lvert \mathbf{h}_k^H \mathbf{w}_{i} \rvert^2 + \sum_{j = 1}^K \lvert \mathbf{h}_k^H \mathbf{v}_{j} \rvert^2 + \sigma_k^2}, ~\forall k \in \mathcal{K}_m
+\end{align}
+and 
+\begin{align}
+  \text{SINR}_{k}^{\text{U}} = \frac {\lvert \mathbf{h}_k^H \mathbf{v}_{k} \rvert^2} {\sum_{i \neq m} \lvert \mathbf{h}_k^H \mathbf{w}_{i} \rvert^2 + \sum_{j \neq k} \lvert \mathbf{h}_k^H \mathbf{w}_{j} \rvert^2 + \sigma_k^2}, ~\forall k \in \mathcal{K}_m,
+\end{align}
+respectively.
+
+\section{Problem Formulation and Analysis}
+We consider the following optimization problem
+\begin{subequations}
+\begin{align} 
+\mathop{\text{max}}_{\mathbf{w}_{m,n}, \mathbf{v}_{k,n}, \mathcal{G}_m, \mathcal{G}} ~& \eta \sum_{m=1}^M \lvert \mathcal{G}_{m} \rvert R_{m}^{\text{M}} + (1 - \eta) \sum_{k \in \mathcal{G}} R_k^{\text{U}}  \label{obj:WSR}\\ 
+\text{s.t.} \qquad \quad & \sum_{m=1}^M \lVert \mathbf{w}_{m,n} \rVert_2^2 + \sum_{k=1}^K \lVert \mathbf{v}_{k,n} \rVert_2^2 \leq P_n,~\forall n \in \mathcal{N}, \label{cons:WSR-power} \\
+& \sum_{m=1}^M \big \| \lVert \mathbf{w}_{m,n} \rVert_2^2 \big \|_0 R_{m}^{\text{M}} + \sum_{k=1}^K \big \| \lVert \mathbf{v}_{k,n} \rVert_2^2 \big \|_0 R_k^{\text{U}} \leq C_n,~\forall n \in \mathcal{N}, \label{cons:WSR-backhaul}\\
+& \text{SINR}_{k}^{\text{M}} \geq \gamma_{m}^{\text{M}},~\forall k \in \mathcal{G}_{m},~m \in \mathcal{M}, \label{cons:WSR-multicast-SINR}\\
+& \text{SINR}_{k}^{\text{U}} \geq \gamma_k^{\text{U}},~\forall k \in \mathcal{G}, \label{cons:WSR-unicast-SINR}\\
+& \mathcal{G}_m \subseteq \mathcal{K}_{m},~m \in \mathcal{M}, \label{cons:WSR-multicast-set} \\
+& \mathcal{G} \subseteq  \cup_{m = 1}^M \mathcal{G}_{m} \subseteq \mathcal{K}, \label{cons:WSR-unicast-set}
+\end{align} \label{pro:WSR}
+\end{subequations}
+where $\gamma_{m}^{\text{M}}$ and $\gamma_{k}^{\text{U}}$ are the minimum received SINR target required by multicast service for group $m$ and unicast service for user $k$, respectively. $R_m^{\text{M}} = \log_2(1 + \gamma_{m}^{\text{M}})$ and $R_k^{\text{U}} = \log_2(1 + \gamma_{k}^{\text{U}})$ are the corresponding transmission rates. For each multicast group $\mathcal{K}_{m}$, only the users belong to $\mathcal{G}_{m}$ can successfully decode their multicast message. 
+
+% It is worth noting that we do not restrict $\mathcal{K}_{m,1} = \mathcal{K}_m$ for all $m \in \mathcal{M}$, which means that not all the users in group $m$ are scheduled. If the channel of a certain user is too poor to decode the BL of the requested video, we discard the user in current scheduling interval.
+
+
+The optimization variables in problem \eqref{pro:WSR} involve sets, which is intractable. First, we transform problem \eqref{pro:WSR} into a tractable form by introducing a set of auxiliary variables $\{r_{k} \geq 0, s_{k} \geq 0 \}_{k=1}^K$. Then, problem \eqref{pro:WSR} can be transformed into
+\begin{subequations}
+\begin{align} 
+\mathop{\text{max}}_{\mathbf{w}_{m,n}, \mathbf{v}_{k,n}, r_{k}, s_{k}} ~& \eta \sum_{m=1}^M \sum_{k \in \mathcal{K}_m} (1- \lVert r_{k} \lVert_0 ) R_{m}^{\text{M}} + (1 - \eta) \sum_{k=1}^K (1- \lVert s_{k} \lVert_0 ) R_k^{\text{U}} \label{obj:WSR-sparse} \\ 
+\text{s.t.} \qquad ~~ & \gamma_{m}^{\text{M}} \Gamma_{k}^{\text{M}} - \lvert \mathbf{h}_k^H \mathbf{w}_{m} \rvert^2 \leq r_{k},~\forall k \in \mathcal{K}_{m}, m \in \mathcal{M}, \label{cons:WSR-sparse-multicast-SINR} \\
+& \gamma_{k}^{\text{U}} \Gamma_{k}^{\text{U}} - \lvert \mathbf{h}_k^H \mathbf{v}_{k} \rvert^2 \leq s_{k},~\forall k \in \mathcal{K}, \label{cons:WSR-sparse-unicast-SINR} \\
+& 0 \leq r_{k} \leq s_{k},~\forall k \in \mathcal{K}, \label{cons:WSR-sparse-order} \\
+& \eqref{cons:WSR-power},~\eqref{cons:WSR-backhaul}. \nonumber
+\end{align} \label{pro:WSR-sparse}
+\end{subequations}
+Regarding the relationship between problem \eqref{pro:WSR} and problem \eqref{pro:WSR-sparse}, we have the following lemma.
+\begin{lemma} \label{lem:equ-WSR}
+Problem \eqref{pro:WSR} and \eqref{pro:WSR-sparse} have the same optimal objective value. In addition, if \allowbreak $\{\mathbf{w}_{m,n}^*, \mathbf{v}_{k,n}^*, r_{k}^*, s_{k}^*\}$ is an optimal solution of problem \eqref{pro:WSR-sparse}, then $\{\mathbf{w}_{m,n}^*, \mathbf{v}_{k,n}^*, \mathcal{G}_m^*, \mathcal{G}^*\}$ is an optimal of problem \eqref{pro:WSR}, where $\mathcal{G}_m^* = \{k | k \in \mathcal{K}_m, r_{k}^* = 0 \}$ and $\mathcal{G}^* = \{k | k \in \mathcal{K}, s_{k}^* = 0 \}$.
+\end{lemma}
+\begin{IEEEproof}
+Please see appendix \ref{app:proof-of-lemma-equ-WSR}.
+\end{IEEEproof}
+Based on Lemma \ref{lem:equ-WSR}, we can obtain the optimal solution of problem \eqref{pro:WSR} though solving problem \eqref{pro:WSR-sparse}. Next, we will focus on problem \eqref{pro:WSR-sparse}. However, problem \eqref{pro:WSR-sparse} is still very difficult to solve, as it involves non-convex constraint \eqref{cons:WSR-sparse-multicast-SINR} and non-convex and non-smooth $\ell_0$-norms in the objective \eqref{obj:WSR-sparse} and constraint \eqref{cons:WSR-backhaul}. In the next section, we will propose an efficient algorithm to obtain an approximation solution.
+
+\section{Proposed Algorithm}
+In this section, we first adopt the smoothed $\ell_0$-norm approximation to deal with the $\ell_0$-norms in the objective \eqref{obj:WSR-sparse} and constraint \eqref{cons:WSR-backhaul}. The resulting approximate problem turns out to be a DC programming problem, which can be effectively solved using CCP.
+
+\subsection{Smoothed $\ell_0$-Norm Approximation}
+By adopting smoothed $\ell_0$-norm approximation, we propose to approximate the non-smooth $\ell_0$-norm in the objective \eqref{obj:WSR-sparse} and constraint \eqref{cons:WSR-backhaul} with a smooth, increasing, and concave functions, denoted as $f(x)$. 
+% without loss of generality, in this paper, we adopt the logarithmic function. i.e., 
+% \begin{align}
+% f(x) = \frac{\log(\frac{x}{\theta} + 1)}{\log(\frac{1}{\theta} + 1)}.
+% \end{align}
+% where $\theta > 0$ is a parameter controlling the smoothness of approximation. A larger $\theta$ leads to smoother function but worse approximation and vice versa. The effectiveness of smoothed $\ell_0$-norm approximation has been demonstrated for sparse signal recovery [xx], feature selection in SVM (Support Vector Machine) [xx], and sparse beamforming design [xx]. Please refer to [xx]-[xx] for more smooth functions.
+Then, remove the constant terms in the objective \eqref{obj:WSR-DC}, we obtain an approximated problem of \eqref{pro:WSR-sparse} as
+\begin{subequations}
+\begin{align} 
+\mathop{\text{min}}_{\mathbf{w}_{m,n}, \mathbf{v}_{k,n}, r_{k}, s_{k}} ~& \eta \sum_{m=1}^M \sum_{k \in \mathcal{K}_m} \lVert r_{k} \lVert_0  R_{m}^{\text{M}} + (1 - \eta) \sum_{k=1}^K \lVert s_{k} \lVert_0 R_k^{\text{U}} \label{obj:WSR-DC} \\ 
+\text{s.t.} \qquad ~~& \sum_{m=1}^M f(\lVert \mathbf{w}_{m,n} \rVert_2^2) R_{m}^{\text{M}} + \sum_{k=1}^K f(\lVert \mathbf{v}_{k,n} \rVert_2^2) R_k^{\text{U}} \leq C_n,~\forall n \in \mathcal{N}, \label{cons:WSR-DC-backhaul}\\
+& \eqref{cons:WSR-power},~\eqref{cons:WSR-sparse-multicast-SINR},~\eqref{cons:WSR-sparse-unicast-SINR},~\eqref{cons:WSR-sparse-order}. \nonumber
+\end{align} \label{pro:WSR-DC}
+\end{subequations}
+Note that problem \eqref{pro:WSR-DC} is a DC programming problem. In the next, we adopt CCP to obtain a stationary solution, which is also a stationary solution of problem \eqref{pro:WSR-DC}.
+
+\subsection{CCP Algorithm}
+The CCP-based algorithm is to replace the concave parts in the objective \eqref{obj:WSR-DC} and constraints \eqref{cons:WSR-sparse-multicast-SINR} and \eqref{cons:WSR-DC-backhaul} with their first-order Taylor expansions, then solve a sequence of convex subproblems successively. Specifically, in the $t$-th iteration, we need to solve
+\begin{subequations}
+\begin{align}
+\mathop{\text{min}}_{\mathbf{w}_{m,n}, \mathbf{v}_{k,n}, r_{k}, s_{k}} ~& \eta \sum_{m=1}^M \sum_{k \in \mathcal{K}_m} R_{m}^{\text{M}} \nabla f(r_{k}^{(t)}) r_{k} + (1 - \eta) \sum_{k=1}^K R_k^{\text{U}} \nabla f(s_{k}^{(t)}) s_{k} \label{obj:WSR-DC-convex}\\
+\text{s.t.} \qquad ~~ & \sum_{m=1}^M \tilde{f}(\lVert \mathbf{w}_{m,n} \rVert_2^2, \lVert \mathbf{w}_{m,n}^{(t)} \rVert_2^2) R_{m}^{\text{M}} + \sum_{k=1}^K \tilde{f}(\lVert \mathbf{v}_{k,n} \rVert_2^2, \lVert \mathbf{v}_{k,n}^{(t)} \rVert_2^2) R_k^{\text{U}} \leq C_n,~\forall n \in \mathcal{N}, \label{cons:WSR-DC-convex-backhaul}\\
+& \gamma_{m}^{\text{M}} \Gamma_{m}^{\text{M}} - 2 \mathfrak{Re} \left \{ (\mathbf{w}_{m}^{(t)})^H \mathbf{h}_k \mathbf{h}_k^H \mathbf{w}_{m} \right \} + \lvert \mathbf{h}_k^H \mathbf{w}_{m}^{(t)} \rvert^2 \leq r_{k},~\forall k \in \mathcal{K}_{m}, m \in \mathcal{M},\label{cons:WSR-DC-convex-multicast-SINR} \\
+& \gamma_{k}^{\text{U}} \Gamma_{k}^{\text{U}} - 2 \mathfrak{Re} \left \{ (\mathbf{v}_{k}^{(t)})^H \mathbf{h}_k \mathbf{h}_k^H \mathbf{v}_{k} \right \} + \lvert \mathbf{h}_k^H \mathbf{v}_{k}^{(t)} \rvert^2 \leq s_{k}, ~\forall k \in \mathcal{K}, \label{cons:WSR-DC-convex-unicast-SINR} \\
+& \eqref{cons:WSR-power},~\eqref{cons:WSR-sparse-order}, \nonumber
+\end{align} \label{pro:WSR-DC-convex}
+\end{subequations}
+where $\tilde{f}(x, x^{(t)}) = f(x^{(t)}) + \nabla f(x^{(t)}) (x - x^{(t)}) $ is the first-order Taylor approximation of $f(x)$ at point $x^{(t)}$. $\mathbf{w}_{m,n}^{(t)}$, $\mathbf{v}_{k,n}^{(t)}$, $r_{k}^{(t)}$ and $s_{k}^{(t)}$ are the optimal solutions obtained from the previous iteration. Problem \eqref{pro:WSR-DC-convex} is convex and can be solved using a general-purpose solver through interior-point methods in general. In what follows, we exploit the specific structure of problem \eqref{pro:WSR-DC-convex} and find its optimal solution using an ADMM-based fast algorithm.
+
+\subsection{ADMM-Based Fast Implementation}
+ADMM
+
+
+\section{Asymptotic Analysis and Algorithm Design for Large-scale Systems}
+The algorithm proposed in the previous section is based on instantaneous CSI. However, the CSI may change rapidly, which may lead to the serving BSs and the quality of the video received at the user side changing too fast. 
+Recently, equipping BSs with large-scale antenna arrays has become important candidate technologies for the future generations of wireless systems (5G). It can provide high-volume data services for a large set of devices. The scale of these wireless systems is significantly large, dealing possibly with hundreds of antennas and users. In these scenarios, some system parameters (e.g., serving BSs and received video quality of each user) tend to become deterministic quantities that only depend on large-scale channel statistical information (e.g., path-loss, shadowing, antenna gain and user location), which change slowly with time. The serving BSs and the quality of the video received at the user side remain deterministic for a long time, while the beamforming vectors are adaptive to the instantaneous small-scale channel information.
+
+\subsection{Asymptotic Analysis}
+The channel $\mathbf{h}_{n,k}$ can be expressed as
+\begin{align}
+\mathbf{h}_{n,k} = \sqrt{\beta_{n,k}} \mathbf{g}_{n,k}
+\end{align} 
+where $\{\beta_{n,k} \in \mathbb{R} \}$ are the large-scale channel attenuations, which change slowly and can be tracked easily, and $\mathbf{g}_{n,k} \sim \mathcal{CN}(0, \mathbf{I}_{L})$ are the small-scale fading coefficients and modeled as independent and identically distributed (i.i.d.) random vectors.
+
+The beamforming vector $\mathbf{w}_{m,l,n}$ can be expressed as
+\begin{align}
+\mathbf{w}_{m,l,n} = \sqrt{\frac{p_{m,l,n}}{L}} \mathbf{v}_{m,l,n}
+\end{align} 
+where $\{p_{m,l,n} \in \mathbb{R} \}$ are the transmit power for the $l$-th layer of video file $m$ at BS $n$, and $\mathbf{v}_{m,l,n}$ are the corresponding beamforming vector with $\lVert \mathbf{v}_{m,l,n} \rVert_2 = 1$.
+
+
+\begin{theorem} \label{the:asy-opt}
+For any given $\mathcal{K}_{m,l}$, when $L \to \infty$, the asymptotically optimal beamforming vector for the $l$-th layer of video file $m$ at BS $n$ is a linear combination of the channels between BS $n$ and the users that decoding the $l$-th layer of video file $m$, i.e.,
+\begin{align}
+\mathbf{w}_{m,l,n} = \sum_{k \in \mathcal{K}_{m,l}} \frac{\xi_{m,l,n,k}}{L} \mathbf{h}_{n,k}.
+\end{align} 
+where $\{\xi_{m,l,n,k} \in \mathbb{C}\}$ are the linear combination coefficients.
+\end{theorem}
+\begin{IEEEproof}
+Please see appendix \ref{app:proof-of-theorem-asy-opt}.
+\end{IEEEproof}
+
+Note that $\lVert \mathbf{w}_{m,l,n} \rVert_2 = \sqrt{\frac{p_{m,l,n}}{L}}$, thus we have $\sum_{k \in \mathcal{K}_{m,l}} \frac{\beta_{n,k}}{L} \lvert \xi_{m,l,n,k} \rvert^2 = p_{m,l,n}$. We further define $\xi_{m,l,n,k} = 0$ if $k \notin \mathcal{K}_{m,l}$ or BS $n$ do not deliver the $l$-th layer of video file $m$. Then, the asymptotic SINR achieved at the user side can be expressed as
+\begin{align}
+  \text{SINR}_{k,l}^{\text{A}} = &\lim_{L \to \infty} \text{SINR}_{k,l} \\
+  = &\frac {\lvert \sum_{n = 1}^N \frac{\xi_{m,l,n,k}}{L} \mathbf{h}_{n,k}^H \mathbf{h}_{n,k} \rvert^2} {\sum_{j = l+1}^L \lvert \sum_{n = 1}^N \frac{\xi_{m,j,n,k}}{L} \mathbf{h}_{n,k}^H \mathbf{h}_{n,k} \rvert^2 + \sigma_k^2} \\
+  = &\frac {\lvert \sum_{n = 1}^N \beta_{n,k} \xi_{m,l,n,k} \rvert^2} {\sum_{j = l+1}^L \lvert \sum_{n = 1}^N \beta_{n,k} \xi_{m,j,n,k} \rvert^2 + \sigma_k^2}, ~\forall k \in \mathcal{K}_m, m \in \mathcal{M}, l \in \mathcal{L},
+\end{align}
+
+Then, with the asymptotic SINR, problem \eqref{pro:WSR-sparse} can be rewritten as
+\begin{subequations}
+\begin{align} 
+\mathop{\text{maximize}}_{\xi_{m,j,n,k}, s_{k,l}} \quad & \sum_{m=1}^M \sum_{l=1}^L \alpha_{m,l}  r_{m,l} \sum_{k \in \mathcal{K}_m} (1- \lVert s_{k,l} \lVert_0 ) \label{obj:asym-WSR-sparse} \\ 
+\text{subject to} \quad & \sum_{m=1}^M \sum_{l=1}^L p_{m,l,n} \leq P_n,~\forall n \in \mathcal{N}, \label{cons:asym-WSR-sparse-power}\\
+& \sum_{m=1}^M \sum_{l=1}^L \lVert p_{m,l,n} \rVert_0 r_{m,l} \leq C_n,~\forall n \in \mathcal{N}, \label{cons:asym-WSR-sparse-backhaul} \\
+& \gamma_{m,l} \left (\sum_{j = l+1}^L \left \lvert \sum_{n = 1}^N \beta_{n,k} \xi_{m,j,n,k} \right \rvert^2 + \sigma_k^2 \right) - \left \lvert \sum_{n = 1}^N \beta_{n,k} \xi_{m,l,n,k} \right \rvert^2 \leq s_{k,l}, \nonumber\\
+&\quad~\forall k \in \mathcal{K}_{m}, m \in \mathcal{M}, l \in \mathcal{L}, \label{cons:asym-WSR-sparse-SINR} \\
+& 0 \leq s_{k,i} \leq s_{k,j},~\forall k \in \mathcal{K}, 1 \leq i < j \leq L. \label{cons:asym-WSR-sparse-order} 
+\end{align} \label{pro:asym-WSR-sparse}
+\end{subequations}
+
+
+% {\color{blue}
+
+% \begin{theorem} \label{the:asy-opt}
+% For any given $\mathcal{K}_{m,l}$, when $L \to \infty$, the asymptotically optimal beamforming vector for the $l$-th layer of video file $m$ at BS $n$ is a linear combination of the channels between BS $n$ and the users that decoding the $l$-th layer of video file $m$, i.e.,
+% \begin{align}
+% \mathbf{v}_{m,l,n} = \sum_{k \in \mathcal{K}_{m,l}} \frac{\xi_{m,l,n,k}}{\sqrt{L}} \mathbf{g}_{n,k}.
+% \end{align} 
+% where $\{\xi_{m,l,n,k} \in \mathbb{C}\}$ are the linear combination coefficients.
+% \end{theorem}
+% \begin{IEEEproof}
+% Please see appendix \ref{app:proof-of-theorem-asy-opt}.
+% \end{IEEEproof}
+
+% Note that since $\lVert \mathbf{v}_{m,l,n} \rVert_2 = 1$, we have $\sum_{k' \in \mathcal{K}_{m,l}} \lvert \xi_{m,l,n,k} \rvert^2 = 1$. We further define $\xi_{m,l,n,k} = 0$ if $k \notin \mathcal{K}_{m,l}$ or BS $n$ do not deliver the $l$-th layer of video file $m$. Then, the asymptotic SINR achieved at the user side can be expressed as
+% \begin{align}
+%   \text{SINR}_{k,l}^{\text{A}} = &\lim_{L \to \infty} \text{SINR}_{k,l} \\
+%   = &\frac {\lvert \sum_{n = 1}^N \frac{\sqrt{\beta_{n,k} p_{m,l,n}}}{L} \xi_{m,l,n,k} \mathbf{g}_{n,k}^H \mathbf{g}_{n,k} \rvert^2} {\sum_{j = l+1}^L \lvert \sum_{n = 1}^N \frac{\sqrt{\beta_{n,k} p_{m,j,n}}}{L} \xi_{m,j,n,k} \mathbf{g}_{n,k}^H \mathbf{g}_{n,k} \rvert^2 + \sigma_k^2} \\
+%   = &\frac {\lvert \sum_{n = 1}^N \sqrt{\beta_{n,k} p_{m,l,n}} \xi_{m,l,n,k} \rvert^2} {\sum_{j = l+1}^L \lvert \sum_{n = 1}^N \sqrt{\beta_{n,k} p_{m,j,n}} \xi_{m,j,n,k} \rvert^2 + \sigma_k^2}, ~\forall k \in \mathcal{K}_m, m \in \mathcal{M}, l \in \mathcal{L},
+% \end{align}
+
+% }
+
+
+
+\appendices
+\section{Proof of Lemma \ref{lem:equ-WSR}} \label{app:proof-of-lemma-equ-WSR}
+To proof Lemma \ref{lem:equ-WSR}, we first make the following assumption.
+\begin{assumption}
+The channel vector between BSs to users are bounded, i.e., $\lVert \mathbf{h}_k \rVert_2 \leq H_{\text{max}}$ for all $k$.
+\end{assumption}
+
+This assumption is usually reasonable for a realistic wireless channel. Moreover, the beamforming vectors are also bounded by the transmit power of the BSs, i.e., $\lVert \mathbf{w}_{m,l} \rVert_2^2 \leq \sum_{n=1}^N P_n$ for all $m$ and $l$. Then, we conclude that the sums of interference and noise power $\Gamma_{k,l} = \sum_{j = l+1}^L \lvert \mathbf{h}_k^H \mathbf{w}_{m,j} \rvert^2 + \sum_{i \neq m} \sum_{j = 1}^L \lvert \mathbf{h}_k^H \mathbf{w}_{i,j} \rvert^2 + \sigma_k^2$ are also bounded for all $k$ and $l$.
+
+
+Let $\{\mathbf{w}_{m,l}^*, s_{k,l}^*\}$ denote the optimal solution of problem \eqref{pro:WSR-sparse} and $P^*$ denote the corresponding optimal objective value. Define $\mathcal{K}_{m,l}^{'} = \{k | k \in \mathcal{K}_m, s_{k,l}^* = 0 \}, \forall m, l$. It can be verified that $\{\mathbf{w}_{m,l}^*, \mathcal{K}_{m,l}^{'}\}$ is a feasible solution of problem \eqref{pro:WSR} with its objective value $Q' = P^*$.
+
+On the other hand, denote $\{\mathbf{w}_{m,l}^*, \mathcal{K}_{m,l}^*\}$ as the optimal solution of problem \eqref{pro:WSR} and $Q^*$ as its corresponding optimal objective value. Let
+\begin{align}
+ s_{k,l}^{'} = 
+ \begin{cases}
+	0, &\text{if } k \in \mathcal{K}_{m,l}^*, \\
+	\gamma_{\text{max}} \Gamma_{\text{max}}, &\text{otherwise.}
+\end{cases} \nonumber
+\end{align}
+where $\gamma_{\text{max}} = \max_{m,l} \{\gamma_{m,l} \}$ and $\Gamma_{\text{max}} = \max_{k,l} \{\Gamma_{k,l}\}$. 
+Then, we can verify that $\{\mathbf{w}_{m,l}^*, s_{k,l}^{'}\}$ is a feasible solution of problem \eqref{pro:WSR-sparse} with its objective value $P' = Q^*$. Since $P' \leq P^*$ and $Q' \leq Q^*$, then we have $P' = P^* = Q' = Q^*$. Furthermore, $\{\mathbf{w}_{m,l}^*, \mathcal{K}_{m,l}^{'}\}$ is an optimal solution of problem \eqref{pro:WSR}, where $\mathcal{K}_{m,l}^{'} = \{k | k \in \mathcal{K}_m, s_{k,l}^* = 0 \}$. Thus we complete the proof. 
+
+\section{Proof of Theorem \ref{the:asy-opt}} \label{app:proof-of-theorem-asy-opt}
+We further define $\xi_{m,l,n,k} = 0$ if $k \notin \mathcal{K}_{m,l}$ or BS $n$ do not deliver the $l$-th layer of video file $m$. 
+% Then, the asymptotically optimal beamforming vector can be rewritten as
+% \begin{align}
+% \mathbf{w}_{m,l,n} = \sum_{k' \in \mathcal{K}_{m,l}} \xi_{m,l,n,k'} \mathbf{h}_{n,k'}.
+% \end{align} 
+When $L \to \infty$, we have
+\begin{align}
+y_{k} = &\sum_{l = 1}^L \mathbf{h}_k^H \mathbf{w}_{m,l} x_{m,l} + \sum_{i \neq m} \sum_{l = 1}^L \mathbf{h}_k^H \mathbf{w}_{i, l} x_{i,l} + n_k \\
+= &\sum_{l = 1}^L \sum_{n = 1}^N \mathbf{h}_{n,k}^H \mathbf{w}_{m,l,n}  x_{m,l} + \sum_{i \neq m} \sum_{l = 1}^L \sum_{n = 1}^N \mathbf{h}_{n,k}^H \mathbf{w}_{i,l,n} x_{i,l} + n_k \\
+= &\sum_{l = 1}^L \sum_{n = 1}^N \mathbf{h}_{n,k}^H \left(\sum_{k' \in \mathcal{K}_{m,l}} \frac{\xi_{m,l,n,k'}}{L} \mathbf{h}_{n,k'} \right) x_{m,l} \\ &+ \sum_{i \neq m} \sum_{l = 1}^L \sum_{n = 1}^N \mathbf{h}_{n,k}^H \left(\sum_{k' \in \mathcal{K}_{i,l}} \frac{\xi_{i,l,n,k'}}{L} \mathbf{h}_{n,k'} \right) x_{i,l} + n_k \\
+= &\underbrace{\sum_{l=1}^L \sum_{n = 1}^N \frac{\xi_{m,l,n,k}}{L} \mathbf{h}_{n,k}^H \mathbf{h}_{n,k} x_{m,l}}_{\Xi} + o(\Xi) + n_k,~\forall k \in \mathcal{K}_{m}.
+\end{align}
+
+
+{\color{blue}
+
+\begin{align}
+y_{k} = &\sum_{l = 1}^L \mathbf{h}_k^H \mathbf{w}_{m,l} x_{m,l} + \sum_{i \neq m} \sum_{l = 1}^L \mathbf{h}_k^H \mathbf{w}_{i, l} x_{i,l} + n_k \\
+= &\sum_{l = 1}^L \sum_{n = 1}^N \mathbf{h}_{n,k}^H \mathbf{w}_{m,l,n}  x_{m,l} + \sum_{i \neq m} \sum_{l = 1}^L \sum_{n = 1}^N \mathbf{h}_{n,k}^H \mathbf{w}_{i,l,n} x_{i,l} + n_k \\
+= &\sum_{l = 1}^L \sum_{n = 1}^N \frac{\sqrt{\beta_{n,k} p_{m,l,n}}}{L} \mathbf{g}_{n,k}^H \left(\sum_{k' \in \mathcal{K}_{m,l}} \xi_{m,l,n,k'} \mathbf{g}_{n,k'} \right) x_{m,l} \\ &+ \sum_{i \neq m} \sum_{l = 1}^L \sum_{n = 1}^N \frac{\sqrt{\beta_{n,k} p_{i,l,n}}}{L} \mathbf{g}_{n,k}^H \left(\sum_{k' \in \mathcal{K}_{i,l}} \xi_{i,l,n,k'} \mathbf{g}_{n,k'} \right) x_{i,l} + n_k \\
+= &\underbrace{\sum_{l=1}^L \sum_{n = 1}^N \frac{\sqrt{\beta_{n,k} p_{m,l,n}}} {L} \xi_{m,l,n,k} \mathbf{g}_{n,k}^H \mathbf{g}_{n,k} x_{m,l}}_{\Xi} + o(\Xi) + n_k,~\forall k \in \mathcal{K}_{m}.
+\end{align}
+}
+
+
+% \bibliographystyle{IEEEtran}
+% \bibliography{IEEEabrv,admm_multicast}
+
+\end{document}
